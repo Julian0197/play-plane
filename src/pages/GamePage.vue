@@ -1,20 +1,26 @@
 <template>
   <container>
-    <sprite :texture="mapImg"></sprite>
+    <Map></Map>
+    <Plane :x="planeInfo.x" :y="planeInfo.y"></Plane>
   </container>
 </template>
 
 <script>
-import mapImg from "../assets/map.jpg"
+import Map from "../components/Map.vue";
+import Plane, { usePlane } from "../components/Plane.vue"
 
 export default {
+  components: {
+    Map,
+    Plane,
+  },
   setup() {
+    const { planeInfo } = usePlane();
     return {
-      mapImg
+      planeInfo,
     }
-  }
-}
+  },
+};
 </script>
 
-<style>
-</style>
+<style></style>
