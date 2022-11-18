@@ -7,6 +7,7 @@
 <script>
 import plane from "../assets/plane.png";
 import { reactive, onMounted, onUnmounted } from "vue";
+
 export default {
   setup() {
     return {
@@ -15,13 +16,15 @@ export default {
   },
 };
 
-export function usePlane() {
+export function usePlane({ onAttack }) {
   const planeInfo = reactive({
     x: 250,
-    y: 65
+    y: 600,
+    width: 258,
+    height: 364
   });
-  
-  // eslint-disable-next-line 
+
+  // eslint-disable-next-line
   // 无需知道飞机移动的逻辑
   function move() {
     // move(键盘事件要传入e)
@@ -50,8 +53,26 @@ export function usePlane() {
     });
   }
 
-  move();
+  function attack() {
+    function handleAttack(e) {
+      if (e.code === "Space") {
+        onAttack &&
+          onAttack({
+            x: planeInfo.x + 100,
+            y: planeInfo.y,
+          });
+      }
+    }
+    onMounted(() => {
+      window.addEventListener("keyup", handleAttack);
+    });
+    onUnmounted(() => {
+      window.removeEventListener("keyup", handleAttack);
+    });
+  }
 
+  move();
+  attack();
   return {
     planeInfo,
   };

@@ -47,6 +47,7 @@ const renderer = createRenderer({
       el.parent.removeChild(el);
     }
   },
+  createText() {},
   createComment() {},
   nextSibling() {}
 });
