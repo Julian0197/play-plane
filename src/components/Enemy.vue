@@ -46,6 +46,7 @@ export function useEnemy() {
     }
   }
 
+  // eslint-disable-next-line no-unused-vars
   function move() {
     function handleTicker() {
       enemys.forEach((enemy, index) => {
@@ -65,6 +66,7 @@ export function useEnemy() {
     });
   }
   createEnemy();
+
   move();
   
   return {
